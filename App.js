@@ -5,11 +5,15 @@ import AddTask from './components/AddTask/index';
 const App = () => {
   const [count, setCount] = useState(0);
   const [tasks, setTasks] = useState([]);
-   const markTaskAsCompleted = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index].completed = true;
-    setTasks(updatedTasks);
-  };
+  const markTaskAsCompleted = (index) => {
+  const updatedTasks = [...tasks];
+  updatedTasks[index].completed = true;
+  setTasks(updatedTasks);
+
+  // Count remaining incomplete tasks
+  const remainingIncompleteTasks = updatedTasks.filter(task => !task.completed).length;
+  setCount(remainingIncompleteTasks);
+};
 
   const renderItem = ({ item, index }) => (
     <View style={styles.item}>
@@ -52,6 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 20,
+    marginTop:30
   },
   headertext: {
     color: '#00e600',
