@@ -8,8 +8,12 @@ const AddTask = ({ tasks, setTasks, setCount }) => {
     if (text.trim() !== '') {
       const newTask = { id: tasks.length, task: text, completed: false };
       setTasks([...tasks, newTask]);
+
+      // Count remaining incomplete tasks and add 1 for the new task
+      const remainingIncompleteTasks = tasks.filter(task => !task.completed).length + 1;
+      setCount(remainingIncompleteTasks);
+
       setText('');
-      setCount(tasks.length + 1);
     }
   };
 
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     margin: 10,
+    bottom:35
     
   },
   textInput: {
